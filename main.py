@@ -70,6 +70,19 @@ def send_telegram_message(token: str, chat_id: str, message: str) -> None:
 if __name__ == "__main__":
     prices = get_awattar_prices()
     PRICE_TABLE = ""
+    if prices:
+        sorted_prices = sorted(p['price'] for p in prices)
+        n = len(sorted_prices)
+        if n % 2 == 1:
+            median_price = sorted_prices[n // 2]
+        else:
+            median_price = (sorted_prices[n // 2 - 1] + sorted_prices[n // 2]) / 2
+        print(f"Median price: {median_price:.2f} €/kWh")
+        PRICE_TABLE += f"Median price: {median_price:.2f} €/kWh\n"
+    if prices:
+        avg_price = sum(p['price'] for p in prices) / len(prices)
+        print(f"Average price: {avg_price:.2f} €/kWh")
+        PRICE_TABLE += f"Average price: {avg_price:.2f} €/kWh\n"
     for price in prices:
         print(f"From {price['start_time']} to {price['end_time']}: {price['price']} €/kWh")
         PRICE_TABLE += (
