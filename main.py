@@ -1,7 +1,7 @@
 import json
 from datetime import datetime, timedelta
 from typing import List, Dict, Union
-from influxdb import InfluxDBClient
+from influxdb import InfluxDBClient # type:ignore
 import requests
 
 SHUTDOWN_PRICE = 15 # Cent/kWh
